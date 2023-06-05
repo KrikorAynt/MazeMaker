@@ -26,7 +26,7 @@ def handle_client(conn,addr):
             if msg == DC_MSSG:
                 connected = False
 
-            print("Recieved [",time.clock(),"]: ", msg)
+            print("Received [", time.perf_counter(), "]: ", msg)
             conn.send("Recieved Instruction".encode(FORMAT))
     conn.close()
 
@@ -38,7 +38,7 @@ def start():
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn,addr))
         thread.start()
-        print("[# of Connections]", {threading.activeCount() - 1})
+        print("[# of Connections]", threading.active_count() - 1)
 
 print("Server Starting Up...")
 start()
